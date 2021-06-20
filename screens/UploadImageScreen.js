@@ -6,15 +6,14 @@ import {
     ScrollView,
     Image,
     TouchableOpacity,
+    Button
 } from 'react-native';
 
-import { Input, Button } from 'react-native-elements';
+import { Input } from 'react-native-elements';
 
-
-const UploadImageScreen = () => {
+const UploadImageScreen = (props) => {
    return(
-     <ScrollView styles={{backgroundColor: '#fff'}}>
-     <View>
+     <ScrollView style={{backgroundColor: '#fff'}}>
         <View style={styles.container}>
             <Image source={{uri: 'https://cdn.logo.com/hotlink-ok/logo-social.png'}} style={styles.logo} />
         </View>
@@ -30,9 +29,11 @@ const UploadImageScreen = () => {
             <Text style={styles.innerText}>Pedro34</Text>
         </View>
         <View style={styles.buttons}>
-            <Button title="Siguiente" containerStyle={{color: '#16d967'}}/>
+            <Button
+                title="Siguiente"
+                color="#16d967"
+                onPress={() => props.navigation.navigate("BasicFormScreen")}/>
         </View>
-     </View>
      </ScrollView>
     );
 };

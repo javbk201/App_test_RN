@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { ThemeProvider } from 'react-native-elements';
 import { createStackNavigator } from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 
@@ -13,26 +13,33 @@ const Stack = createStackNavigator();
 function MyStack(){
     return(
         <Stack.Navigator>
-            <Stack.Screen name="UploadImageScreen" component={UploadImageScreen} />
-            <Stack.Screen name="BasicFormScreen" component={BasicFormScreen} />
-            <Stack.Screen name="HomeScreen" component={HomeScreen} />
-            <Stack.Screen name="AdvanceFormScreen" component={AdvanceFormScreen} />
+            <Stack.Screen
+                name="UploadImageScreen"
+                component={UploadImageScreen}
+                options={{ title: ' ' }}
+                />
+            <Stack.Screen
+                name="BasicFormScreen"
+                component={BasicFormScreen}
+                options={{ title: ' ' }}/>
+            <Stack.Screen
+                name="HomeScreen"
+                component={HomeScreen}
+                options={{ title: ' ' }}/>
+            <Stack.Screen
+                name="AdvanceFormScreen"
+                component={AdvanceFormScreen}
+                options={{ title: ' ' }}/>
         </Stack.Navigator>
     );
 };
 
 export default function App() {
   return (
-      <NavigationContainer>
-        <MyStack />
-      </NavigationContainer>
+      <ThemeProvider>
+        <NavigationContainer>
+            <MyStack />
+        </NavigationContainer>
+      </ThemeProvider>
   );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex:1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
-});

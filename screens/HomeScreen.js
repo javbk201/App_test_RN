@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 
-const HomeScreen = () => {
+const HomeScreen = (props) => {
    return(
      <ScrollView>
      <View style={styles.container}>
@@ -25,7 +25,10 @@ const HomeScreen = () => {
         <Text style={styles.lightText}>Para poder ofrecerte un mejor servicio, cuéntanos que tipo de jugador eres</Text>
         </View>
         <View style={styles.buttons}>
-        <Button title="Contar un poco" color='#48BB78'/>
+        <Button
+            title="Contar un poco"
+            color='#16d967'
+            onPress={() => props.navigation.navigate("AdvanceFormScreen")}/>
         <TouchableOpacity><Text style={{textAlign: 'center'}}>Revisar más tarde</Text></TouchableOpacity>
         </View>
      </View>
@@ -58,18 +61,20 @@ const styles = StyleSheet.create({
     imagePlayer:{
         width: 200,
         height: 300,
-        paddingBottom: 5
+        paddingBottom: 5,
+        resizeMode: 'contain'
     },
     logo: {
         width: 150,
         height: 100,
+        resizeMode: 'contain'
     },
     p: {
         padding: 25,
         margin: 14,
     },
     buttons:{
-        padding: 24,
+        paddingTop: 24,
         paddingBottom: 60
     }
 });
