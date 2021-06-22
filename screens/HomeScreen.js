@@ -28,7 +28,7 @@ const HomeScreen = (props) => {
         <Button
             title="Contar un poco"
             color='#16d967'
-            onPress={() => props.navigation.navigate("AdvanceFormScreen")}/>
+            onPress={() => props.navigation.navigate("AdvanceFormScreen", { imageRoute: props.route.params.imageRoute, userName: props.route.params.userName })}/>
         <TouchableOpacity><Text style={{textAlign: 'center'}}>Revisar más tarde</Text></TouchableOpacity>
         </View>
      </View>

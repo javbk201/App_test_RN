@@ -17,11 +17,20 @@ function MyStack(){
                 name="UploadImageScreen"
                 component={UploadImageScreen}
                 options={{ title: ' ' }}
+                initialParams={{
+                    userId: 42,
+                    imageUri: '',
+                }}
                 />
             <Stack.Screen
                 name="BasicFormScreen"
                 component={BasicFormScreen}
-                options={{ title: ' ' }}/>
+                options={{ title: ' ' }}
+                initialParams={{
+                    userName: '',
+                    userEmail: '',
+                    ciudad: ''
+                }}/>
             <Stack.Screen
                 name="HomeScreen"
                 component={HomeScreen}

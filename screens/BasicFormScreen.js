@@ -4,15 +4,35 @@ import {
     Text,
     View,
     ScrollView,
+    Button,
     Image,
-    TouchableOpacity,
-    Button
+    TextInput
 } from 'react-native';
-
-import { Input } from 'react-native-elements';
-
+import {Picker} from '@react-native-picker/picker';
+import { Input, Icon } from 'react-native-elements';
+import ModalSelector from 'react-native-modal-selector';
 
 const BasicFormScreen = (props) => {
+
+   const cuidad = [
+        {key: 1, label:'Baranquilla'},
+        {key: 2, label:'Medellín'},
+        {key: 3, label:'Santa Marta'},
+        {key: 4, label:'Bogota'},
+    ];
+
+   const [selectedCity, setSelectedCity] = useState('Medellín');
+
+   const [userData, setUserData] = useState({
+       name: '',
+       email: '',
+       ciudad: selectedCity,
+       sector: '',
+    });
+   const handleChangeText = (data, value) =>{
+       setUserData({ ...userData, [data]: value });
+    };
+
    return(
      <ScrollView style={{backgroundColor: '#fff'}}>
         <View style={styles.container}>
@@ -23,20 +43,50 @@ const BasicFormScreen = (props) => {
             <Text style={styles.lightText}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed</Text>
         </View>
         <View style={styles.p}>
-            <Text>Nombre</Text>
-            <Input placeholder='Pedro Ramirez'/>
-            <Text>Email</Text>
-            <Input placeholder='pedro@mail.com'/>
-            <Text>Cuidad</Text>
-            <Input placeholder='Medellin'/>
-            <Text>Sector o barrio</Text>
-            <Input placeholder='Poblado'/>
+            <Input
+                label='Nombre'
+                labelStyle={{ color: '#000' }}
+                placeholder='Pedro Ramirez'
+                onChangeText={(value)=> handleChangeText('name', value)}
+                />
+            <Input
+                label='Email'
+                labelStyle={{ color: '#000' }}
+                placeholder='pedro@mail.com'
+                onChangeText={(value)=> handleChangeText('email', value)}
+                />
+            <ModalSelector
+            data={cuidad}
+            initValue='Medellín'
+            supportedOrientations={['landscape']}
+            accessible={true}
+            scrollViewAccessibilityLabel={'Scrollable options'}
+            cancelButtonAccessibilityLabel={'Cancel Button'}
+            onChange={(option) => {setSelectedCity(option.label)}}
+            >
+                <Input
+                    editable={false}
+                    label='Cuidad'
+                    labelStyle={{ color: '#000' }}
+                    placeholder='Medellín'
+                    value={selectedCity}
+                    rightIcon={{name: 'angle-down', type: 'font-awesome'}}
+                    />
+            </ModalSelector>
+            <Input
+                label='Sector o barrio'
+                labelStyle={{ color: '#000' }}
+                placeholder='Poblado'
+                onChangeText={(value)=> handleChangeText('sector', value)}/>
         </View>
         <View style={styles.buttons}>
         <Button
-            title="Contar un poco"
+            title="Siguiente"
             color="#16d967"
-            onPress={() => props.navigation.navigate("HomeScreen")}/>
+            onPress={() => props.navigation.navigate("HomeScreen", {
+                imageRoute: props.route.params.imageRoute,
+                userName: userData.name
+            })}/>
         </View>
      </ScrollView>
     );
